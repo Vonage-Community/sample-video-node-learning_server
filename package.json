@@ -18,7 +18,7 @@
     "jade": "^1.11.0",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
-    "@vonage/server-sdk": "^2.12.0-beta.2",
+    "@vonage/server-sdk": "^3.0.0",
     "@vonage/video": "^0.8.3",
     "serve-favicon": "~2.5.0",
     "uglify-js": "^3.13.4"
