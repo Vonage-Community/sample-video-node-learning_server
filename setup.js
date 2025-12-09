@@ -150,7 +150,7 @@ async function updatePhoneNumber(number) {
   const options = {
     country: process.env.COUNTRY_CODE,
     msisdn: number.msisdn,
-    app_id: process.env.API_APPLICATION_ID,
+    appId: process.env.API_APPLICATION_ID,
   };
 
   const resp = await vonage.numbers.updateNumber(options);
