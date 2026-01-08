@@ -158,7 +158,7 @@ async function updatePhoneNumber(number) {
     console.error(`Error: ${resp.errorCodeLabel}`);
   } else {
     console.log('Added number to application!');
-    process.env.VONAGE_NUMBER = number.msisdn;
+    process.env.CONFERENCE_NUMBER = number.msisdn;
     writeEnv();
   }
 }
@@ -178,11 +178,11 @@ function createApp(data) {
           voice: {
               webhooks: {
                   answer_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/webhooks/answer`,
+                      address: `https://${process.env.CODESPACE_NAME}.github.dev/sip/vapi/answer`,
                       http_method: "GET"
                   },
                   event_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/webhooks/event`,
+                      address: `https://${process.env.CODESPACE_NAME}.github.dev/sip/vapi/events`,
                       http_method: "POST"
                   }
               }
@@ -250,7 +250,7 @@ VONAGE_API_SECRET="${process.env.VONAGE_API_SECRET}"
 VONAGE_APPLICATION_NAME="${process.env.VONAGE_APPLICATION_NAME}"
 API_APPLICATION_ID="${process.env.API_APPLICATION_ID}"
 COUNTRY_CODE="${process.env.COUNTRY_CODE}"
-VONAGE_NUMBER="${process.env.VONAGE_NUMBER}"
+CONFERENCE_NUMBER="${process.env.CONFERENCE_NUMBER}"
 PRIVATE_KEY64="${process.env.PRIVATE_KEY64}"`;
   
   fs.writeFile(__dirname + '/.env', contents, (err) => {
