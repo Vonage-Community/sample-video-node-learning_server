@@ -6,6 +6,8 @@ const { Vonage } = require('@vonage/server-sdk');
 
 let vonage;
 
+const PORT = '3000';
+
 console.log('setup.js running...');
 if (process.env.VONAGE_API_KEY && process.env.VONAGE_API_SECRET) {
   // If the environment variables are already set, use them
@@ -178,11 +180,11 @@ function createApp(data) {
           voice: {
               webhooks: {
                   answer_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/sip/vapi/answer`,
+                      address: `https://${process.env.CODESPACE_NAME}-${PORT}.app.github.dev/sip/vapi/answer`,
                       http_method: "GET"
                   },
                   event_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/sip/vapi/events`,
+                      address: `https://${process.env.CODESPACE_NAME}-${PORT}.app.github.dev/sip/vapi/events`,
                       http_method: "POST"
                   }
               }
@@ -190,11 +192,11 @@ function createApp(data) {
           messages: {
               webhooks: {
                   inbound_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/webhooks/inbound`,
+                      address: `https://${process.env.CODESPACE_NAME}-${PORT}.app.github.dev/webhooks/inbound`,
                       http_method: "POST"
                   },
                   status_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/webhooks/status`,
+                      address: `https://${process.env.CODESPACE_NAME}-${PORT}.app.github.dev/webhooks/status`,
                       http_method: "POST"
                   }
               }
@@ -202,7 +204,7 @@ function createApp(data) {
           rtc: {
               webhooks: {
                   event_url: {
-                      address: `https://${process.env.CODESPACE_NAME}.github.dev/webhooks/rtcevent`,
+                      address: `https://${process.env.CODESPACE_NAME}-${PORT}.app.github.dev/webhooks/rtcevent`,
                       http_method: "POST"
                   }
               }
