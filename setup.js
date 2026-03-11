@@ -1,8 +1,6 @@
-require('dotenv').config();
-
-const fs = require('fs');
-
-const { Vonage } = require('@vonage/server-sdk');
+import 'dotenv/config';
+import fs from 'fs';
+import { Vonage } from '@vonage/server-sdk';
 
 let vonage;
 

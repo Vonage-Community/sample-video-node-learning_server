@@ -1,13 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path');
-const _ = require('lodash');
-const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
-const { Connect, Conversation, NCCOBuilder, Talk } = require('@vonage/voice')
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const { tokenGenerate } = require('@vonage/jwt')
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import _ from 'lodash';
+import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator';
+import { Connect, Conversation, NCCOBuilder, Talk } from '@vonage/voice';
+import fetch from 'node-fetch';
+import { tokenGenerate } from '@vonage/jwt';
+import fs from 'fs';
 
-const fs = require('fs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const router = express.Router();
 
 const appId = process.env.API_APPLICATION_ID;
 let privateKey;
@@ -34,8 +38,8 @@ if (!appId || !privateKey) {
   process.exit();
 }
 
-const { Vonage } = require('@vonage/server-sdk');
-const { Video } = require('@vonage/video')
+import { Vonage } from '@vonage/server-sdk';
+import { Video } from '@vonage/video';
 const vonageCredentials = {
   applicationId: appId,
   privateKey: privateKey
@@ -532,4 +536,4 @@ router.get('/_/health', async function (req, res) {
   res.status(200).send({status: 'OK'});
 })
 
-module.exports = router;
+export default router;
