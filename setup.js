@@ -211,7 +211,7 @@ function createApp(data) {
   }).then((app) => {
       console.log('Application created with ID: ', app.id);
       process.env.API_APPLICATION_ID = app.id;
-      fs.writeFile(__dirname + '/private.key', app.keys.private_key, (err) => {
+      fs.writeFile(import.meta.dirname + '/private.key', app.keys.private_key, (err) => {
         if (err) {
           console.log('Error writing private key: ', err);
         } else {
@@ -219,7 +219,7 @@ function createApp(data) {
           try {
             // convert private.key to base64
             console.log('Converting private key to base64...');
-            const privateKey = fs.readFileSync(__dirname + '/private.key');
+            const privateKey = fs.readFileSync(import.meta.dirname + '/private.key');
             const base64PrivateKey = privateKey.toString('base64');
             process.env.PRIVATE_KEY64 = base64PrivateKey;
 
@@ -253,7 +253,7 @@ COUNTRY_CODE="${process.env.COUNTRY_CODE}"
 CONFERENCE_NUMBER="${process.env.CONFERENCE_NUMBER}"
 PRIVATE_KEY64="${process.env.PRIVATE_KEY64}"`;
   
-  fs.writeFile(__dirname + '/.env', contents, (err) => {
+  fs.writeFile(import.meta.dirname + '/.env', contents, (err) => {
     if (err) {
       console.log('Error writing .env file: ',err);
     } else {
@@ -270,7 +270,7 @@ function createUser() {
   apiKey: process.env.VONAGE_API_KEY,
   apiSecret: process.env.VONAGE_API_SECRET,
   applicationId: process.env.API_APPLICATION_ID,
-  privateKey: __dirname + process.env.PRIVATE_KEY
+  privateKey: import.meta.dirname + process.env.PRIVATE_KEY
   }, {debug: false});
   vonage.users.create({
       name: process.env.ADMIN_NAME,
